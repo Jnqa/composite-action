@@ -1,1 +1,0 @@
-echo "Goodbye - Permission denied"
