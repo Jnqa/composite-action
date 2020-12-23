@@ -22,6 +22,12 @@ runs:
     - id: random_number_generator
       run: echo "::set-output name=random_id::$(echo $RANDOM)"
       shell: bash
-    - id: food
-      run: echo "::set-output name=test::strawberry"
+    - id: file example
+      run: |
+        mkdir /test/
+        cp test.sh /test/tested.sh
+        ls /test/tested.sh
+        cat /test/tested.sh
+        echo `cat /test/tested.sh`
+        
       shell: bash
