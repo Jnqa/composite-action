@@ -5,8 +5,23 @@ inputs:
     description: 'Who to greet'
     required: false
     default: 'World'
+outputs:
+  random_number: 
+    description: "Random number"
+    value: ${{ steps.random_number_generator.outputs.random_id }}
+  food: 
+    description: "Food"
+    value: ${{ steps.food.outputs.test }}
 runs:
   using: "composite"
   steps: 
     - run: echo Hello ${{ inputs.who-to-greet }}.
+      shell: bash
+    - run: echo os ${{runner.os}}
+      shell: bash
+    - id: random_number_generator
+      run: echo "::set-output name=random_id::$(echo $RANDOM)"
+      shell: bash
+    - id: food
+      run: echo "::set-output name=test::strawberry"
       shell: bash
