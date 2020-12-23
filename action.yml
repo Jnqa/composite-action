@@ -5,6 +5,9 @@ inputs:
     description: 'Who to greet'
     required: false
     default: 'World'
+  file:
+    description: 'some files'
+    required: true 
 outputs:
   random_number: 
     description: "Random number"
@@ -25,7 +28,7 @@ runs:
     - id: file example
       run: |
         mkdir /test/
-        cp test.sh /test/tested.sh
+        cp ${{ inputs.file }} /test/tested.sh
         ls /test/tested.sh
         cat /test/tested.sh
         echo `cat /test/tested.sh`
