@@ -23,7 +23,7 @@ runs:
       run: |
         pushd ${{ inputs.dist }}
         zip -r ${{ inputs.dist }}.zip *
-        ARCHIVE=dist.zip
+        ARCHIVE=${{ inputs.dist }}.zip
         popd
         echo "::set-output name=archive::$(echo $ARCHIVE)"
       shell: bash
@@ -33,23 +33,15 @@ runs:
       run: echo "VERSION=$(echo $GITHUB_REF | cut -d / -f 3 | sed 's/^v-\?//g')" >> $GITHUB_ENV
       shell: bash
     - name: Prepare S3 upload if Vesion exists
-      if: input.version == ''
+      #if: input.version == ''
       id: s3
       run: |
-        mkdir s3
-        mv ${{ inputs.dist }}/${{ inputs.dist }}.zip s3/latest.zip
-        mv dist s3/latest
+        mkdir s3 
+        [[ ${{ inputs.version }} == '' ]] && distname=latest || distname=${{ inputs.dist }}
+        mv ${{ inputs.dist }}/${{ inputs.dist }}.zip s3/$distname.zip
+        mv ${{ inputs.dist }} s3/$distname
         S3=s3
         echo "::set-output name=s3::$(echo $S3)"
       shell: bash
-    - name: Prepare S3 upload if Version not null
-      if: input.version != ''
-      id: s3
-      run: |
-        mkdir s3
-        mv ${{ inputs.dist }}/${{env.VERSION}}.zip s3/latest.zip
-        mv dist s3/${{env.VERSION}}
-        S3=s3
-        echo "::set-output name=s3::$(echo $S3)"
-      shell: bash
+
      
