@@ -25,5 +25,5 @@ runs:
         echo "::set-output name=archive::$(echo $ARCHIVENAME)"
       shell: bash
     - name: REPORT
-      run: echo "REPORT" && ls ${{ inputs.inputdir }}/
+      run: echo "REPORT" && ls ./${{ inputs.inputdir }}/
       shell: bash
