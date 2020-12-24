@@ -10,8 +10,8 @@ inputs:
     requred: true
 outputs:
   file: 
-    description: "fileexample"
-    value: ${{ steps.fileexample.outputs.test }}
+    description: "Archive"
+    value: ${{ steps.archive.outputs.archive }}
 runs:
   using: "composite"
   steps: 
@@ -20,8 +20,11 @@ runs:
     - run: echo os ${{runner.os}}
       shell: bash
     - name: Archive
+      id: archive
       run: |
         pushd ${{ inputs.dist }}
         zip -r ${{ inputs.dist }}.zip *
+        ARCHIVE=dist.zip
         popd
+        echo "::set-output name=archive::$(echo $ARCHIVE)"
     - run: ls . && ls ./${{ inputs.dist }}/
