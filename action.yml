@@ -21,7 +21,8 @@ runs:
         pushd ${{ inputs.inputdir }}
         zip -r ${{ inputs.archivenane }}.zip *
         popd
-        echo "::set-output name=archive::$(echo ${{inputs.archivenane}})"
+        ARCHIVENAME=${{inputs.archivenane}}
+        echo "::set-output name=archive::$(echo $ARCHIVENAME)"
       shell: bash
     - name: REPORT
       run: echo "REPORT" && ls ${{ inputs.inputdir }}/
