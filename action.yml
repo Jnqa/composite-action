@@ -32,5 +32,5 @@ runs:
         mv ${{ inputs.dist }}/${{ inputs.dist }}.zip s3/latest.zip
         mv dist s3/latest
         S3=s3
-        echo "::set-output name=archive::$(echo $S3)"
+        echo "::set-output name=s3::$(echo $S3)"
       shell: bash
