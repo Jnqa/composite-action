@@ -44,5 +44,3 @@ runs:
       shell: bash
     - run: ls . && ls ./${{ inputs.dist }}/ && ls ./s3/
       shell: bash
-
-     
