@@ -1,5 +1,5 @@
-name: 'Hello World'
-description: 'no de'
+name: 'Zipping folder and prepare to upload'
+description: 'no description'
 inputs:
   dist:
     description: 'folder dist'
@@ -43,5 +43,5 @@ runs:
         mv ${{ inputs.dist }} s3/$distname
       shell: bash
     - name: REPORT
-      run: ls . && ls s3/
+      run: echo "REPORT" && ls s3/
       shell: bash
