@@ -29,8 +29,9 @@ runs:
       run: |
         mkdir /test/
         cp ${{ inputs.file }} /test/tested.sh
-        ls /test/tested.sh
+        ls /test/
         cat /test/tested.sh
         echo `cat /test/tested.sh`
+        echo "test test test"
         
       shell: bash
