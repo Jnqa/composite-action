@@ -33,11 +33,11 @@ runs:
       run: echo "VERSION=$(echo $GITHUB_REF | cut -d / -f 3 | sed 's/^v-\?//g')" >> $GITHUB_ENV
       shell: bash
     - name: Prepare S3 upload if Vesion exists
-      #if: input.version == ''
+      #if: ${{ inputs.version }} == ''
       id: s3
       run: |
         mkdir s3 
-        [[ "${{ inputs.version }}" == "" ]] && distname='latest' || distname=${{ inputs.dist }}
+        [[ "${{ inputs.version }}" == "" ]] && distname='latest' || distname=${{ inputs.version }}
         mv ${{ inputs.dist }}/${{ inputs.dist }}.zip s3/$distname.zip
         mv ${{ inputs.dist }} s3/$distname
         S3=s3
