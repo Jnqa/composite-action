@@ -28,8 +28,9 @@ runs:
     - id: fileexample
       run: |
         mkdir /test/
+        cat test.sh
         chmod 777 test.sh
-        ls /
+        ls .
         cp ${{ inputs.file }} /test/tested.sh
         ls /test/
         cat /test/tested.sh
