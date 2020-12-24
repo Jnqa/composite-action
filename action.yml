@@ -25,7 +25,10 @@ runs:
       shell: bash
     - run: ls . && ls ./${{ inputs.dist }}/
       shell: bash
-    - name: Prepare S3 upload
+    - name: Get the version
+      run: echo "VERSION=$(echo $GITHUB_REF | cut -d / -f 3 | sed 's/^v-\?//g')" >> $GITHUB_ENV
+    - name: Prepare S3 upload if Vesion exists
+      if: ${{ env.VERSION == '' }}
       id: s3
       run: |
         mkdir s3
@@ -34,3 +37,14 @@ runs:
         S3=s3
         echo "::set-output name=s3::$(echo $S3)"
       shell: bash
+    - name: Prepare S3 upload if Version not null
+      if: ${{ env.VERSION != '' }}
+      id: s3
+      run: |
+        mkdir s3
+        mv ${{ inputs.dist }}/${{env.VERSION}}.zip s3/latest.zip
+        mv dist s3/${{env.VERSION}}
+        S3=s3
+        echo "::set-output name=s3::$(echo $S3)"
+      shell: bash
+     
