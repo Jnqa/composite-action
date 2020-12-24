@@ -33,4 +33,5 @@ runs:
         cat /test/tested.sh
         test=$(echo `cat /test/tested.sh`a)
         echo "test test test"
+        echo $test
       shell: bash
