@@ -27,4 +27,6 @@ runs:
         ARCHIVE=dist.zip
         popd
         echo "::set-output name=archive::$(echo $ARCHIVE)"
+      shell: bash
     - run: ls . && ls ./${{ inputs.dist }}/
+      shell: bash
