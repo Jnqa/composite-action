@@ -30,3 +30,9 @@ runs:
       shell: bash
     - run: ls . && ls ./${{ inputs.dist }}/
       shell: bash
+    - name: Prepare S3 upload
+      run: |
+        mkdir s3
+        mv ${{ inputs.dist }}/${{ inputs.dist }}.zip s3/latest.zip
+        mv dist s3/latest
+      shell: bash
