@@ -42,6 +42,6 @@ runs:
         mv ${{ inputs.dist }}/${{ inputs.dist }}.zip s3/$distname.zip
         mv ${{ inputs.dist }} s3/$distname
       shell: bash
-      name: REPORT
-    - run: ls . && ls s3/
+    - name: REPORT
+      run: ls . && ls s3/
       shell: bash
