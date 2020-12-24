@@ -10,4 +10,4 @@ jobs:
       uses: Jnqa/composite-action@v3
       with:
         who-to-greet: 'Tester'
-        file: test.sh
+        file: ./test.sh
