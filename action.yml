@@ -9,9 +9,12 @@ inputs:
     description: 'folder dist'
     requred: true
 outputs:
-  file: 
+  archive: 
     description: "Archive"
     value: ${{ steps.archive.outputs.archive }}
+  s3:
+    description: "S3 catalog"
+    value: ${{ steps.s3.outputs.s3 }}
 runs:
   using: "composite"
   steps: 
@@ -31,8 +34,11 @@ runs:
     - run: ls . && ls ./${{ inputs.dist }}/
       shell: bash
     - name: Prepare S3 upload
+      id: s3
       run: |
         mkdir s3
         mv ${{ inputs.dist }}/${{ inputs.dist }}.zip s3/latest.zip
         mv dist s3/latest
+        S3=./s3
+        echo "::set-output name=archive::$(echo $S3)
       shell: bash
