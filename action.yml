@@ -21,13 +21,13 @@ runs:
       shell: bash
     - id: fileexample
       run: |
-        mkdir /test/
+        mkdir ./test/
         cat test.sh
         chmod 777 test.sh
         ls .
-        cp ${{ inputs.file }} /test/tested.sh
-        ls /test/
-        cat /test/tested.sh
-        test=$(echo `cat /test/tested.sh`)
+        cp ${{ inputs.file }} ./test/tested.sh
+        ls ./test/
+        cat ./test/tested.sh
+        test=$(echo `cat ./test/tested.sh`)
         echo $test
       shell: bash
