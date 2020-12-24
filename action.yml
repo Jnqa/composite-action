@@ -31,8 +31,9 @@ runs:
       shell: bash
     - name: Get the version
       run: echo "VERSION=$(echo $GITHUB_REF | cut -d / -f 3 | sed 's/^v-\?//g')" >> $GITHUB_ENV
+      shell: bash
     - name: Prepare S3 upload if Vesion exists
-      if: ${{ input.version == '' }}
+      if: input.version == ''
       id: s3
       run: |
         mkdir s3
@@ -42,7 +43,7 @@ runs:
         echo "::set-output name=s3::$(echo $S3)"
       shell: bash
     - name: Prepare S3 upload if Version not null
-      if: ${{ input.version != '' }}
+      if: input.version != ''
       id: s3
       run: |
         mkdir s3
