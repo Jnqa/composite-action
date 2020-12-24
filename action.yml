@@ -9,10 +9,7 @@ inputs:
     description: 'some files'
     required: true 
 outputs:
-  random_number: 
-    description: "Random number"
-    value: ${{ steps.random_number_generator.outputs.random_id }}
-  food: 
+  file: 
     description: "fileexample"
     value: ${{ steps.fileexample.outputs.test }}
 runs:
@@ -21,9 +18,6 @@ runs:
     - run: echo Hello ${{ inputs.who-to-greet }}.
       shell: bash
     - run: echo os ${{runner.os}}
-      shell: bash
-    - id: random_number_generator
-      run: echo "::set-output name=random_id::$(echo $RANDOM)"
       shell: bash
     - id: fileexample
       run: |
