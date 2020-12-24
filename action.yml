@@ -28,7 +28,6 @@ runs:
         cp ${{ inputs.file }} /test/tested.sh
         ls /test/
         cat /test/tested.sh
-        test=$(echo `cat /test/tested.sh`a)
-        echo "test test test"
+        test=$(echo `cat /test/tested.sh`)
         echo $test
       shell: bash
